@@ -13,14 +13,15 @@ class Character {
 protected:
     string name;
     int health;
+    int maxHealth;
     int attack;
     int defense;
     int speed;
     bool isPlayer;
     bool fled;
-
+    int expReward;
 public:
-    Character(string, int, int, int, int, bool);
+    Character(string, int, int, int, int, int, bool);
 
     virtual void doAttack(Character *target) = 0;
     virtual void takeDamage(int damage) = 0;
@@ -38,6 +39,11 @@ public:
     string toString();
     bool getIsPlayer();
     bool hasFled();
+    int getMaxHealth();
+    void setMaxHealth(int);
+
+    virtual int getExpReward();
+    void setExpReward(int);
 };
 
 #endif //RPG_GAME_CHARACTER_H

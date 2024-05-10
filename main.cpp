@@ -5,9 +5,14 @@
 #include <queue>
 
 int main() {
-    auto *player = new Player("Samuel", 25, 7, 2, 10);
-    auto *enemy = new Enemy("Goblin", 20, 4, 2, 7);
-    auto *enemy2 = new Enemy("Orc", 30, 5, 3, 2);
+    string name;
+    auto *enemy = new Enemy("Goblin", 20, 4, 2, 7, 15);
+    auto *enemy2 = new Enemy("Orc", 30, 5, 3, 2, 30);
+
+    cout << "¿Cual es tu nombre?" << endl;
+    cin >> name;
+
+    auto *player = new Player(name, 25, 7, 2, 10);
 
     vector<Character*> participants;
     participants.push_back(player);

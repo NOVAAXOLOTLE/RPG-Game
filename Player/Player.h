@@ -16,6 +16,8 @@ class Player: public Character {
 protected:
     int experience;
     int level;
+    bool leveledUp;
+
 public:
     Player(string _name, int _health, int _attack, int _defense, int _speed);
     void doAttack(Character *target) override;
@@ -27,6 +29,9 @@ public:
 
     [[maybe_unused]] static void emote();
     void levelUp();
+    int getLevel();
+    bool isLeveledUp();
+    void setLeveledUp(bool);
 
     [[maybe_unused]] void gainExperience(int);
 

@@ -28,6 +28,7 @@ private:
 
     void checkParticipantStatus(Character* participant);
     void checkForFlee(Character* character);
+    void gainReward(Character *participant);
 
 public:
     explicit Combat(vector<Character*> _participants);

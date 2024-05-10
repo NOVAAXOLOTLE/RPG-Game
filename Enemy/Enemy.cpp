@@ -4,6 +4,7 @@
 
 #include "Enemy.h"
 #include <iostream>
+#include <utility>
 
 using namespace std;
 
@@ -17,7 +18,8 @@ bool compareSpeed(Player *a, Player *b) {
     return a->getSpeed() > b->getSpeed();
 }
 
-Enemy::Enemy(string name, int health, int attack, int defense, int speed) : Character(name, health, attack, defense, speed, false){
+Enemy::Enemy(string name, int health, int attack, int defense, int speed, int expReward) : Character(std::move(name), health, attack, defense, expReward, speed, false){
+    maxHealth = health;
 }
 
 void Enemy::doAttack(Character *target) {
@@ -84,4 +86,15 @@ Action Enemy::takeAction(const vector<Player *> &player) {
     }
 
     return myAction;
+}
+
+int Enemy::getExpReward() {
+    return expReward;
+}
+
+void Enemy::uploadStatistics() {
+    setHealth(getMaxHealth() + 10);
+    setAttack(getAttack() + 5);
+    setDefense(getDefense() + 5);
+    setSpeed(getSpeed() + 5);
 }

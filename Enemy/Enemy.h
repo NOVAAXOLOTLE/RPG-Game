@@ -14,13 +14,16 @@ class Player;
 
 class Enemy: public Character{
 public:
-    Enemy(string, int, int, int, int);
+    Enemy(string, int, int, int, int, int);
     void doAttack(Character *target) override;
     void takeDamage(int damage) override;
 
     void flee(vector<Player*> partyMembers);
     Character* getTarget(vector<Player*> partyMembers);
     Action takeAction(const vector<Player*>& player);
+
+    int getExpReward() override;
+    void uploadStatistics();
 };
 
 #endif //RPG_GAME_ENEMY_H

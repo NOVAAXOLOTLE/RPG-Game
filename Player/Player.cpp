@@ -16,9 +16,11 @@ bool compareSpeed(Enemy *a, Enemy *b) {
 }
 
 Player::Player(string _name, int _health, int _attack, int _defense, int _speed) :
-Character(std::move(_name), _health, _attack, _defense, _speed, true) {
+Character(std::move(_name), _health, _attack, _defense, expReward, _speed, true) {
     experience = 0;
     level = 1;
+    maxHealth = _health;
+    leveledUp = false;
 }
 
 void Player::doAttack(Character *target) {
@@ -68,17 +70,18 @@ void Player::flee(vector<Enemy *> enemies) {
 
 void Player::levelUp() {
     level++;
-    setHealth(getHealth() + 10);
+    setHealth(getMaxHealth() + 10);
     setAttack(getAttack() + 5);
     setDefense(getDefense() + 5);
     setSpeed(getSpeed() + 5);
+    this->leveledUp = true;
 }
 
 [[maybe_unused]] void Player::gainExperience(int exp) {
     experience += exp;
     if (experience >= 100) {
         levelUp();
-        experience = 0;
+        experience -= 100;
     }
 }
 
@@ -117,5 +120,17 @@ Action Player::takeAction(const vector<Enemy *> &enemies) {
     }
 
     return myAction;
+}
+
+int Player::getLevel() {
+    return level;
+}
+
+bool Player::isLeveledUp() {
+    return leveledUp;
+}
+
+void Player::setLeveledUp(bool _leveledUp) {
+    this->leveledUp = _leveledUp;
 }
 

@@ -72,9 +72,25 @@ void Combat::checkParticipantStatus(Character *participant) {
             partyMembers.erase(remove(partyMembers.begin(), partyMembers.end(), participant), partyMembers.end());
         }
         else {
+            gainReward(participant);
             enemies.erase(remove(enemies.begin(), enemies.end(), participant), enemies.end());
         }
         participants.erase(remove(participants.begin(), participants.end(), participant), participants.end());
+    }
+}
+
+void Combat::gainReward(Character *participant) {
+    int exp = 0;
+    exp = participant->getExpReward();
+
+    partyMembers[0]->gainExperience(exp);
+    if (partyMembers[0]->isLeveledUp()) {
+        for (int i = 0; i < enemies.size(); ++i) {
+            if (enemies[i] != participant) {
+                enemies[i]->uploadStatistics();
+            }
+        }
+        partyMembers[0]->setLeveledUp(false);
     }
 }
 

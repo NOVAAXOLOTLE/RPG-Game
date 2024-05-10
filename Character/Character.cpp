@@ -3,18 +3,21 @@
 //
 
 #include <string>
+#include <utility>
 #include "Character.h"
 
 using namespace std;
 
-Character::Character(string _name, int _health, int _attack, int _defense, int _speed, bool _isPlayer) {
-    name = _name;
+Character::Character(string _name, int _health, int _attack, int _defense, int _expReward, int _speed, bool _isPlayer) {
+    name = std::move(_name);
     health = _health;
+    maxHealth = _health;
     attack = _attack;
     defense = _defense;
     speed = _speed;
     isPlayer = _isPlayer;
     fled = false;
+    expReward = _expReward;
 }
 
 string Character::getName() {
@@ -67,4 +70,20 @@ bool Character::getIsPlayer() {
 
 bool Character::hasFled() {
     return fled;
+}
+
+void Character::setExpReward(int _expReward) {
+    expReward = _expReward;
+}
+
+int Character::getExpReward() {
+    return expReward;
+}
+
+int Character::getMaxHealth() {
+    return maxHealth;
+}
+
+void Character::setMaxHealth(int _maxHealth) {
+    Character::maxHealth = _maxHealth;
 }
